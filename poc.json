@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "PoC API",
-    "description": "This is a harmless test PoC for Swagger-UI.",
+    "description": "<script>alert(1)</script>",
     "version": "1.0.0"
   },
   "paths": {
