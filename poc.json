@@ -19,7 +19,7 @@
               "type": "string",
               "example": "<script>alert('SwaggerTest')</script>"
             },
-            "description": "This field contains a harmless test payload."
+            "description": "<script>alert('SwaggerTest')</script>"
           }
         ],
         "responses": {
