@@ -1,0 +1,48 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PoC API",
+    "description": "This is a harmless test PoC for Swagger-UI.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/echo": {
+      "get": {
+        "summary": "Echo test endpoint",
+        "description": "Returns back whatever you send. Use this to check if Swagger renders payloads.",
+        "parameters": [
+          {
+            "name": "input",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "<script>alert('SwaggerTest')</script>"
+            },
+            "description": "This field contains a harmless test payload."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "echo": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "echo": "<script>alert('SwaggerTest')</script>"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
