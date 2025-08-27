@@ -8,7 +8,7 @@
     "/xss": {
       "get": {
         "summary": "XSS Test",
-        "description": "<script>alert(document.cookie)</script>",
+        "description": "<Img Src=OnXSS OnError=confirm(1)>",
         "responses": {
           "200": {
             "description": "Success"
