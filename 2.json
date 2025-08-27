@@ -1,0 +1,20 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "<a href=evil.com>clickk</a>",
+    "version": "1.0"
+  },
+  "paths": {
+    "/xss": {
+      "get": {
+        "summary": "<a href=evil.com>clickk</a>",
+        "description": "<Img Src=OnXSS OnError=confirm(1)",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  }
+}
