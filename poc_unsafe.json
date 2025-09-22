@@ -1,0 +1,54 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "<a href=\"https://example.com\" target=\"_blank\">clickkk</a>",
+    "description": "<script>console.log('info.description script');</script>\n\nUse this PoC to check how your Swagger UI renders HTML/JS and unusual inputs.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://example.local",
+      "description": "PoC server (not real) - only for testing UI rendering"
+    }
+  ],
+  "paths": {
+    "/echo": {
+      "get": {
+        "summary": "Echo test endpoint",
+        "description": "Returns whatever you send. Use this to see how parameters and examples are rendered.",
+        "parameters": [
+          {
+            "name": "input",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "<script>alert('SwaggerTest')</script>"
+            },
+            "description": "Example contains a script tag to test XSS rendering"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "echo": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "echo": "<script>alert('SwaggerTest')</script>"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
