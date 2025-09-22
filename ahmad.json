@@ -1,0 +1,119 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "<a href=\"https://example.com\" target=\"_blank\">clickkk</a>",
+    "description": "<script>console.log('info.description script');</script>\n\nUse this PoC to check how your Swagger UI renders HTML/JS and unusual inputs.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://example.local",
+      "description": "PoC server (not real) - only for testing UI rendering"
+    }
+  ],
+  "paths": {
+    "/echo": {
+      "get": {
+        "summary": "Echo test endpoint",
+        "description": "Returns whatever you send. Use this to see how parameters and examples are rendered.",
+        "parameters": [
+          {
+            "name": "input",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "<script>alert('SwaggerTest')</script>"
+            },
+            "description": "Example contains a script tag to test XSS rendering"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "echo": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "echo": "<script>alert('SwaggerTest')</script>"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/long": {
+      "get": {
+        "summary": "Long input test",
+        "description": "Use a very long string to see if the UI or backend truncates or crashes.",
+        "parameters": [
+          {
+            "name": "payload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            },
+            "description": "Very long string example (100 A's)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/type-mismatch": {
+      "post": {
+        "summary": "Type mismatch test",
+        "description": "Send a string where a number is expected to test type validation.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "example": "NOT_A_NUMBER"
+                  }
+                },
+                "required": ["amount"]
+              },
+              "example": {
+                "amount": "NOT_A_NUMBER"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/markdown": {
+      "get": {
+        "summary": "Markdown rendering test",
+        "description": "This description includes markdown and an HTML snippet: **bold text**, [link](https://example.com), <b>raw HTML</b>.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
